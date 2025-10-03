@@ -1,27 +1,27 @@
-Company Search Chatbot (Demo)
+Company Search Chatbot
 
-This project demonstrates how to build a company search chatbot that can:
+A demo project that shows how to build a company search assistant using:
 
-Search over documents (using OpenAI File Search / vector stores).
+OpenAI File Search / Vector Stores → for answering from documents
 
-Query structured analytics data (via the Vanna API).
+Vanna API → for querying structured analytics data
 
-The chatbot can answer questions either from your uploaded company files or by querying Vanna for metrics like usage, counts, and analytics.
+The chatbot can answer questions from uploaded company files and also handle structured queries such as usage metrics.
 
-🚀 Features
+Features
 
-Upload your own PDFs, DOCX, or TXT files into a vector store.
+Upload and index your own documents (PDF, DOCX, TXT, etc.)
 
-Search documents with natural language questions.
+Natural language search across documents
 
-Route structured queries (e.g. “hosted app usage in last 24 hours”) to the Vanna API.
+Route analytics questions to the Vanna API
 
-Combine both sources for a unified company search assistant.
+Combine unstructured and structured results in one chatbot
 
-⚙️ Setup
-1. Clone this repo
-git clone https://github.com/your-username/company-search-chatbot.git
-cd company-search-chatbot
+Setup
+1. Clone the repo
+git clone https://github.com/adityasudhakar/company-search.git
+cd company-search
 
 2. Create a virtual environment
 python3 -m venv .venv
@@ -34,59 +34,53 @@ pip install -r requirements.txt
 
 4. Configure environment variables
 
-Copy .env.example to .env and fill in your own keys:
+Copy the example environment file and fill in your own keys:
 
 cp .env.example .env
 
 
 Inside .env:
 
-OPENAI_API_KEY=your-openai-api-key-here
-VANNA_API_KEY=your-vanna-api-key-here
-VANNA_USER_EMAIL=your-email@domain.com
+OPENAI_API_KEY=your-openai-api-key
+VANNA_API_KEY=your-vanna-api-key
+VANNA_USER_EMAIL=your-email@company.com
 VECTOR_STORE_ID=your-vector-store-id
 
 
-⚠️ Never commit your real .env to GitHub. Only push .env.example.
+⚠️ Never commit .env to GitHub. Only .env.example is shared.
 
-📂 Project Structure
-company-search-chatbot/
-│
-├── chatbot.py           # main chatbot combining file search + Vanna
-├── upload_files.py      # helper to upload files to OpenAI
-├── vectorstore.py       # create a new vector store
-├── files_to_vector.py   # attach files to vector store
-├── vector_status.py     # check file processing status
-├── requirements.txt     # dependencies
-├── .env.example         # sample env file
-├── .gitignore           # ignore venv, .env, etc.
-└── README.md            # this file
-
-🧑‍💻 Usage
-
-Upload files:
-
+Usage
+Upload files & create a vector store
 python upload_files.py
 python vectorstore.py
 python files_to_vector.py
 python vector_status.py
 
-
-Run the chatbot:
-
+Run the chatbot
 python chatbot.py
 
+Example queries
 
-Example queries:
+“What is the GCP VM architecture?” → answered from docs
 
-“What is the GCP VM architecture?” → answers from your docs
+“How many hosted app questions were asked in the last 24 hours?” → routed to Vanna
 
-“How many hosted app questions were asked in the last 36 hours?” → routed to Vanna
+Project Structure
+company-search/
+├── chatbot.py           # main chatbot (docs + Vanna)
+├── upload_files.py      # upload files to OpenAI
+├── vectorstore.py       # create a vector store
+├── files_to_vector.py   # attach files to store
+├── vector_status.py     # check file indexing status
+├── requirements.txt     # dependencies
+├── .env.example         # sample env file
+├── .gitignore           # ignores .env, venv, etc.
+└── README.md            # this file
 
-🔒 Security
+Security
 
 API keys and private company files are not included in this repo.
 
-Always store secrets in .env and add .env to .gitignore.
+Store secrets in .env.
 
-You can safely demo this chatbot using public files (e.g. sample PDFs) without exposing private data.
+Add sensitive files (e.g. PDFs, DOCXs) to .gitignore.
