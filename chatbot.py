@@ -1,19 +1,20 @@
 import json
 import requests
 from openai import OpenAI
+import os
 
-client = OpenAI()
+client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
 # --- Vanna API call ---
 def call_vanna(message, user_email="adi@vanna.ai"):
     url = "https://app.vanna.ai/api/v0/chat_sse"
     headers = {
         "Content-Type": "application/json",
-        "VANNA-API-KEY": "vn-96862437e7034ebeb1082c45e0181caf"
+        "VANNA-API-KEY": os.environ.get("VANNA_API_KEY")
     }
     payload = {
         "message": message,
-        "user_email": user_email,   # always override with your email
+        "user_email": os.environ.get("VANNA_USER_EMAIL"),   # always override with your email
         "acceptable_responses": ["text"]
     }
     resp = requests.post(url, headers=headers, json=payload)

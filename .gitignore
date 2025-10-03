@@ -1,0 +1,11 @@
+# venv
+.venv/
+__pycache__/
+*.pyc
+
+# secrets
+.env
+*.key
+
+# system
+.DS_Store
